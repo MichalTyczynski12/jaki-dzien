@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <div id="aktualnaData">
+
+    </div>
+    <input type="date" id="date" name="date" value="2008-12-22">
+    <button  onclick="pokazTekst()" id="btn"> Kliknij </button>
+    <div id="tekst">
+
+    </div>
+   
+    <script>
+
+        function showDate(){
+            var today = new Date();
+            var month = today.getUTCMonth() + 1;
+            var day = today.getUTCDate();
+            var year = today.getUTCFullYear();
+            var hour = today.getHours()
+            var minutes = today.getMinutes()
+            document.getElementById("aktualnaData").innerHTML = "Atkualna data: " + day + "." + month + "." +  year + " i godzina: " + hour + ":" + minutes
+        }
+
+        function pokazTekst() {
+            var today = new Date();
+            var date = document.getElementById("date").value
+            var date_from = new Date(date)
+            date_from.setHours( 0,0,0,0 );
+            console.log(date_from)
+            const roznica = Math.abs(today - date_from);
+            const dni = Math.floor(roznica / (1000 * 60 * 60 * 24)); 
+            const godziny = Math.floor(roznica / (60 * 60 * 1000)); 
+            console.log(godziny + " godziny");
+            console.log(dni + " dni");
+            const tydzien = ["niedziela", "poniedziałek","wtorek","środa","czwartek","piątek","sobota"];
+            let dzien = tydzien[date_from.getDay()];
+            document.getElementById("tekst").innerHTML = "Upłyneło " + dni + " dni oraz " + godziny + " godzin  i dzien tygodnia " + dzien; 
+        }
+        window.onload = showDate
+
+    </script>
+</body>
+</html>
